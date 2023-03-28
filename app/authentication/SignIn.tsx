@@ -17,15 +17,16 @@ const SignIn:React.FC<Props> = ({
 }) => {
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState(''); 
-  const authValue = useContext(AuthContext);
+  const {user, login, logout} = useContext(AuthContext);
   const navigation = useNavigation(); 
   const router = useRouter();
+  // const login = authValue?.login
+  // const logout = authValue.logout
   // console.log("Auth value: " + authValue?.auth)
   async function signIn() {
     try {
         const user = await Auth.signIn(email, password);
         console.log("Here is the user", user); 
-        authValue?.setAuth({isLoggedIn: true})
         router.replace("/home/Map")
     } catch (error) {
         // setIsLoggedIn(false);
@@ -65,7 +66,7 @@ const SignIn:React.FC<Props> = ({
             
             <TouchableOpacity 
               style={baseStyle.loginBtn}
-              onPress={() => signIn()}
+              onPress={() => login(email, password)}
               >
               
                 <Text style={baseStyle.smallTextAuthButton}>Login</Text>

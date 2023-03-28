@@ -60,12 +60,12 @@ const AlertList:any = () => {
 export default function Map() {
 
     const router = useRouter()
-    const authValue = useContext(AuthContext)
+    const {logout} = useContext(AuthContext)
 
-    function signOut () {
-        authValue?.setAuth({isLoggedIn: false})
-        router.replace("/")
-    }
+    // function signOut () {
+    //     authValue?.setAuth({isLoggedIn: false})
+    //     router.replace("/")
+    // }
     return (
         <SafeAreaView style={{backgroundColor: "#887676", height: '100%'}}>
             <ScrollView style={[appStyles.fullView]}
@@ -76,7 +76,7 @@ export default function Map() {
                         <AlertList/>
                     </View>
                     <TouchableOpacity style={{alignItems: 'center', margin: 10, backgroundColor: 'grey', padding: 10}}
-                    onPress={() => signOut()}
+                    onPress={() => logout()}
                     >
                         <Text style={{fontSize: 30}}> Logout </Text>
                     </TouchableOpacity>

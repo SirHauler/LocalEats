@@ -7,26 +7,27 @@ import awsmobile from "../src/aws-exports";
 import { AuthContext } from "../util/AuthProvider";
 Amplify.configure(awsmobile);
 
-export type LoginContextType = {
-  isLoggedIn: boolean, 
-  login: () => void
-}
-export const LoginContext = createContext<LoginContextType>({
-  isLoggedIn: false, 
-  login: () => {}
-});
 
+// export type LoginContextType = {
+//   isLoggedIn: boolean, 
+//   login: () => void
+// }
+// export const LoginContext = createContext<LoginContextType>({
+//   isLoggedIn: false, 
+//   login: () => {}
+// });
 // export const useGlobalContext = () => useContext(LoginContext)
 
 export default function Index() {
   
-  const authValue = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
   // console.log(authValue?.auth.isLoggedIn)
+  console.log("User: " + user)
   return (
     <>
       {
-        authValue?.auth.isLoggedIn ? (
-          <Redirect href="app/home/Map"/>
+        user ? (
+          <Redirect href="/home/Map"/>
         ) : (
           <View style={styles.container}>
           <View style={styles.main}>
@@ -44,17 +45,6 @@ export default function Index() {
       }
     </>
   )
-  if (isLoggedIn) {
-    // redirect to home page if logged in
-    return <AuthProvider>
-            
-          </AuthProvider>
-  }
-  // navigate to home page
-  return (
-  <AuthProvider>
-    </AuthProvider>
-  );
 }
 
 const styles = StyleSheet.create({
