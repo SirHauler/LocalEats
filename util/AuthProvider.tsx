@@ -51,6 +51,7 @@ const AuthProvider= (props: AuthProps) => {
       setUser(user)
     } catch (e) {
       console.log(e)
+      setUser(null)
     }
   }
 
@@ -70,7 +71,7 @@ const AuthProvider= (props: AuthProps) => {
     try {
       await Auth.signOut()
       setUser(null)
-      router.replace("/")
+      router.push("/authentication/SignIn")
       console.log("User Logged Out: " + user)
     } catch (error) {
       console.log(error)
@@ -82,6 +83,19 @@ const AuthProvider= (props: AuthProps) => {
     currentUser()
     console.log('Fetched Current User')
   }, [refresh])
+
+  function useProtectedRoute(user: any) {
+    useEffect(() => {
+      if (user == null) {
+        router.push("/authentication")
+      } else {
+        router.replace("/home")
+      }
+    }, [user])
+
+  }
+
+  useProtectedRoute(user)
 
   return (
     <AuthContext.Provider value={{user, login, logout}}>

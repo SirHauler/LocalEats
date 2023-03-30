@@ -35,16 +35,19 @@ const appStyles = StyleSheet.create({
       width: '100%', 
       borderRadius: 10
     }, 
-    locationHeader: {
-      textAlign: 'center', 
-      fontSize: 25, 
+    header: {
+      // textAlign: 'center', 
+      fontSize: 30, 
       margin: 10
     }, 
     fullView: {
-      backgroundColor: "#887676"
+      // backgroundColor: "#887676"
     }, 
     addressView: {
       alignItems: 'center'
+    }, 
+    safeAreaView: {
+      height: '100%'
     }
   });
 

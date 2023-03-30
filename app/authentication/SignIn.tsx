@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Redirect, useNavigation, useRouter } from "expo-router";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform } from 'react-native'
 import { useFonts } from 'expo-font';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import baseStyle from "../../assets/baseStyles";
 import appStyles from "../../assets/appStyles";
 import SignUp from "./SignUp";
