@@ -13,7 +13,7 @@ import {
 
 // import { Auth } from 'aws-amplify';
 import { useNavigation } from '@react-navigation/native';
-import AlertItem from '../../assets/components/alertItem';
+import AlertItem from '../../components/alertItem';
 import appStyles from '../../assets/appStyles';
 import { AuthContext } from '../../util/AuthProvider';
 import { useServerState } from 'expo-router/src/static/useServerState';
@@ -35,19 +35,6 @@ const Profile:React.FC<Props> = ({
 
 }) => {
 
-    // async function currentUser() {
-    //     try {
-    //       const attributes = await Auth.currentUserInfo(); 
-    //       console.log("Current User Retrieved", attributes.attributes.name + " " + attributes.attributes.family_name)
-    //       setUsername(attributes.attributes.name + " " + attributes.attributes.family_name)
-    //     } catch (error) {
-    //       console.log('error in retrieving current user', error)
-    //     }
-    //   }
-        
-    // useEffect(() => {
-    //     currentUser()
-    // }, [])
     return (
        <SafeAreaView style={{flex: 1}}>
             <ScrollView>

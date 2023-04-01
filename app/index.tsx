@@ -1,5 +1,5 @@
 import "expo-router/entry";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useEffect, useState, createContext, useContext, useCallback } from "react";
 import { Link, Redirect } from "expo-router";
 import { Amplify } from 'aws-amplify'; 
@@ -7,6 +7,7 @@ import awsmobile from "../src/aws-exports";
 import { AuthContext } from "../util/AuthProvider";
 import * as SplashScreen from 'expo-splash-screen';
 import '@azure/core-asynciterator-polyfill'
+import Ionicons from '@expo/vector-icons/Ionicons';
 Amplify.configure(awsmobile);
 
 
@@ -19,7 +20,7 @@ export default function Index() {
   useEffect(() => {
     async function prepare() {
       try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e)
       }
@@ -45,7 +46,7 @@ export default function Index() {
   return (
     <>
       {
-        user ? (
+        user != null ? (
           <Redirect href="/home/Map"/>
         ) : (
           <View style={styles.container} onLayout={onLayoutRootView}>
@@ -54,9 +55,21 @@ export default function Index() {
               <Text style={styles.subtitle}>Find Local Food. Fast.</Text>
       
               <View> 
-              <TouchableOpacity style={styles.findButton}>
-                <Link href="authentication/SignIn" style={styles.findText}> Find Vendors </Link>
-              </TouchableOpacity>
+              <View style={styles.optionsView}>
+                <Link href="authentication/SignIn" asChild> 
+                  <TouchableOpacity style={styles.authButtons}>
+                    <Ionicons name="lock-open-sharp" size={25}/>
+                    <Text style={styles.findText}>Login</Text>
+                  </TouchableOpacity> 
+                </Link>
+                
+                <Link href="authentication/SignUp" asChild>
+                   <TouchableOpacity style={styles.authButtons}>
+                    <Ionicons name="person-add-sharp" size={25}/>
+                      <Text style={styles.findText}>Register</Text>
+                   </TouchableOpacity>
+                </Link>
+              </View>
               </View>
             </View>
         </View>
@@ -86,13 +99,24 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: "#38434D",
   },
-  findButton: {
+  optionsView: {
     margin: 20, 
     padding: 5, 
     alignItems: 'center', 
-    borderRadius: 10, 
+    borderRadius: 10,
   }, 
   findText: {
-    fontSize: 20
+    fontSize: 20, 
+    textAlign: 'center', 
+    marginHorizontal: 15, 
+  }, 
+  authButtons: {
+    borderWidth: 2, 
+    margin: 4, 
+    borderRadius: 20, 
+    backgroundColor: 'grey', 
+    width: 150, 
+    flexDirection: 'row', 
+    padding: 10, 
   }
 });

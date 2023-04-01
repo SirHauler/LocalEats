@@ -16,7 +16,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 // import userPageStyle from '../styles/userPageStyle';
 // import ComfortaaText from '../styles/fonts/ComfortaaText';
-import AlertItem from '../../assets/components/alertItem';
+import AlertItem from '../../components/alertItem';
 import appStyles from '../../assets/appStyles';
 import { useRouter } from 'expo-router';
 import { AuthContext } from '../../util/AuthProvider';

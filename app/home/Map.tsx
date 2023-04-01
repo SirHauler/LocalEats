@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 // import ComfortaaText from '../styles/fonts/ComfortaaText';
 import appStyles from '../../assets/appStyles';
 import MapView, { Marker } from 'react-native-maps';
-import VendorComponent from '../../assets/components/vendorComponent';
+import VendorComponent from '../../components/vendorComponent';
 export type Props = {
 
 }
@@ -44,7 +44,9 @@ const Map: React.FC<Props> = ({
                         initialRegion={sfRegion}
                         
                 >
-                    <Marker coordinate={sfRegion}/>
+                    <Marker coordinate={sfRegion}
+
+                    />
             </MapView>
             <View style={styles.searchBox}>
                 <Ionicons name='search-sharp' size={20}/>

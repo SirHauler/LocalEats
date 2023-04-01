@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   headerLeft: {
     marginLeft: 10, 
     fontSize: 30,
+    fontWeight: '400'
   }, 
   headerRight: {
     marginRight: 10,

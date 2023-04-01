@@ -40,7 +40,7 @@ const SignIn:React.FC<Props> = ({
   return (
   <View style={baseStyle.container}>
             <Text style={styles.title}>
-                Sign In 
+                Login
             </Text>
             <View style={appStyles.inputView}>
                 <TextInput 
@@ -76,7 +76,7 @@ const SignIn:React.FC<Props> = ({
 
             <TouchableOpacity>
                 <Text style={baseStyle.smallTextAuth}
-                      onPress={() => router.push("./SignUp")}
+                      onPress={() => router.replace("./SignUp")}
                 >New? Register.</Text>
             </TouchableOpacity>
 

@@ -13,12 +13,21 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export type Props = {
-    specialties: string | undefined | null, 
+    specialties: [], 
+    hours: object
 }
 const VendorComponent: React.FC<Props> =  ({
-    specialties
+    specialties, 
+    hours,
 }) => {
-    const food = specialties["food"]; 
+    const [specials, setSpecials] = useState('')
+    useEffect(() => {
+        let res = ""
+        for (let i = 0; i < specialties.length; i++) {
+            res += specialties[i] + ", "
+        }
+        setSpecials(res)
+    }, [])
     return (
         <TouchableOpacity style={styles.vendorBox}>
             <View style={styles.vendorItemContainer}>
@@ -38,11 +47,14 @@ const VendorComponent: React.FC<Props> =  ({
                 </View>
 
                 <View style={styles.vendorInfoView}>
+                    <Text>
+                        [Name]
+                    </Text>
                     <Text style={styles.vendorText}>
-                        {food}
+                        {specials}
                     </Text>
 
-                    <Text style={styles.vendorText}>.5 miles</Text>
+                    <Text style={styles.vendorText}>{}</Text>
 
                     <Text style={styles.vendorText}>Open: 10am - 11pm</Text>
                 </View>
@@ -54,8 +66,8 @@ const VendorComponent: React.FC<Props> =  ({
 
 const styles = StyleSheet.create({
     vendorItemContainer: {
-        flexDirection: 'row', 
-        backgroundColor: '#887676', 
+        flexDirection: 'row',  
+        backgroundColor: 'grey', 
         borderRadius: 10, 
         flex: 1, 
         width: 300, 
@@ -63,10 +75,11 @@ const styles = StyleSheet.create({
     }, 
     vendorBox: {
         height: 100, 
-        backgroundColor: 'white', 
+        // backgroundColor: 'white', 
         margin: 10, 
         borderRadius: 10,
-        alignItems: 'center'
+        alignItems: 'center', 
+        width: 'auto'
     }, 
     starAndRatingContainer: {
         height: '100%', 

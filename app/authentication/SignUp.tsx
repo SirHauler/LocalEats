@@ -104,7 +104,7 @@ export default function SignUp() {
             </View>
 
             <TouchableOpacity>
-                <Text style={baseStyle.smallTextAuth} onPress={() => router.back()}>Already a user? Login.</Text>
+                <Text style={baseStyle.smallTextAuth} onPress={() => router.replace("/authentication/SignIn")}>Already a user? Login.</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => signUp(email, password)}>
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
         height: 30,
         marginBottom: 10,
       }, 
-
        signedin_button: {
         marginTop: 20, 
        }, 

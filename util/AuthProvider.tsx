@@ -24,20 +24,6 @@ export const AuthContext = createContext<AuthContextValue>({
   logout: () => {}, 
 });
 
-// interface AuthContextType {
-//   isLoggedIn: boolean
-//   setIsLoggedIn: Function
-//   // logout: () => void;
-// }
-
-// export const AuthContext = createContext<AuthContextType>({
-//   isLoggedIn: false,
-//   setIsLoggedIn: () => {}
-//   // logout: () => {},
-// });
-
-// export const AuthContext = createContext({});
-
 const AuthProvider= (props: AuthProps) => {
   // const [user, setUser] = useState<{ username: string } | null>(null);
   // const [auth, setAuth] = useState({isLoggedIn: false});
@@ -71,7 +57,8 @@ const AuthProvider= (props: AuthProps) => {
     try {
       await Auth.signOut()
       setUser(null)
-      router.push("/authentication/SignIn")
+      router.back()
+      router.replace("/authentication/SignIn")
       console.log("User Logged Out: " + user)
     } catch (error) {
       console.log(error)
@@ -82,20 +69,8 @@ const AuthProvider= (props: AuthProps) => {
   useEffect(() => {
     currentUser()
     console.log('Fetched Current User')
-  }, [refresh])
+  }, [])
 
-  function useProtectedRoute(user: any) {
-    useEffect(() => {
-      if (user == null) {
-        router.push("/authentication")
-      } else {
-        router.replace("/home")
-      }
-    }, [user])
-
-  }
-
-  useProtectedRoute(user)
 
   return (
     <AuthContext.Provider value={{user, login, logout}}>
