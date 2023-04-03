@@ -14,6 +14,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { AuthContext } from '../../util/AuthProvider';
 import appStyles from '../../assets/appStyles';
+import {useFonts, Roboto_200Black} from '@expo-google-fonts/roboto'
 
 export type Props = {
 
@@ -22,8 +23,12 @@ export type Props = {
 const Settings: React.FC<Props> = ({
 
 }) => {
+    let [fontsLoaded] = useFonts({
+        Roboto_200Black
+    })
     const router = useRouter()
-    const { logout } = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
+    const {attributes} = user
 
 
     return (
@@ -34,12 +39,22 @@ const Settings: React.FC<Props> = ({
                         <Ionicons name='arrow-back-sharp' size={30}/>
                     </TouchableOpacity>
                 </View>
-                <View>
-                    <TouchableOpacity style={styles.logoutButton}
-                        onPress={() => logout()}
-                    >
-                        <Text style={{fontSize: 30, fontWeight: 'bold'}}> Logout </Text>
-                    </TouchableOpacity>
+
+                <View style={styles.scrollView}>
+
+                    <View style={styles.userAttributesView}>
+                        <Text style={styles.userAttributesText}>{attributes.name} {attributes.family_name}</Text>
+                        <Text style={styles.userAttributesText}>{attributes.email}</Text>
+                    </View>
+
+                    <View>
+                        <TouchableOpacity style={styles.logoutButton}
+                            onPress={() => logout()}
+                        >
+                            <Text style={{fontSize: 20, fontWeight: '500'}}> Logout </Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -47,6 +62,9 @@ const Settings: React.FC<Props> = ({
 }
 
 const styles = StyleSheet.create({
+    scrollView: {
+        alignItems: 'center'
+    }, 
     backButton: {
         marginLeft: 10
     }, 
@@ -60,6 +78,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center', 
         borderWidth: 2, 
     }, 
+    userAttributesView: {
+        width: '70%',
+        margin: 20
+    }, 
+    userAttributesText: {
+        margin: 5,  
+        fontSize: 20
+    }
+
 })
 
 export default Settings; 

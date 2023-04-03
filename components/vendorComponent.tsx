@@ -11,20 +11,40 @@ import {
   View,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
 export type Props = {
     specialties: [], 
-    hours: object
+    hours: object, 
+    name: string | undefined | null,
+    rating: number, 
+    address: {
+        address: {
+            zipcode: string, 
+            streetAddress: string, 
+            city: string, 
+            state: string,
+        }
+    } | string 
 }
 const VendorComponent: React.FC<Props> =  ({
     specialties, 
     hours,
+    name, 
+    rating, 
+    address, 
 }) => {
     const [specials, setSpecials] = useState('')
+    const [open, setOpen] = useState(hours["Monday"]["Open"])
+    const [close, setClose] = useState(hours["Monday"]["Close"])
+    // const [address, setAddress] = useState(address)
     useEffect(() => {
         let res = ""
         for (let i = 0; i < specialties.length; i++) {
-            res += specialties[i] + ", "
+            if (i == specialties.length - 1) {
+                res += specialties[i]
+            } else {
+                res += specialties[i] + ", "
+            }
+            
         }
         setSpecials(res)
     }, [])
@@ -37,26 +57,27 @@ const VendorComponent: React.FC<Props> =  ({
 
                     <View style={styles.stars}>
                     <Text>
+                        {rating}/5
+                        {/* <Ionicons name='star' size={12}/>
                         <Ionicons name='star' size={12}/>
                         <Ionicons name='star' size={12}/>
                         <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/>
+                        <Ionicons name='star' size={12}/> */}
                     </Text>
                     </View>
                 </View>
 
                 <View style={styles.vendorInfoView}>
                     <Text>
-                        [Name]
+                        {name}
                     </Text>
                     <Text style={styles.vendorText}>
                         {specials}
                     </Text>
 
-                    <Text style={styles.vendorText}>{}</Text>
+                    <Text style={styles.vendorText}>{address.address.streetAddress}</Text>
 
-                    <Text style={styles.vendorText}>Open: 10am - 11pm</Text>
+                    <Text style={styles.vendorText}>Open: {open} - {close}</Text>
                 </View>
 
             </View>

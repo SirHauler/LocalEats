@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+    RefreshControl,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 import appStyles from '../../assets/appStyles';
 import MapView, { Marker } from 'react-native-maps';
 import VendorComponent from '../../components/vendorComponent';
+import { LazyVendorInfo } from '../../src/models';
+import fetchVendors from '../../util/fetchVendors';
 export type Props = {
 
 }
@@ -25,18 +28,17 @@ export type Props = {
 const Map: React.FC<Props> = ({
 
 }) => {
-
+    const [vendorData, setVendorData] = useState<LazyVendorInfo[]>([]);
+    useEffect(() => {
+        fetchVendors(setVendorData) 
+        // console.log("Vendors: \n" + JSON.stringify(vendorData))
+    }, [])
     const sfRegion = {
         latitude: 37.78825,
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     }
-
-    const specialties = {
-        "food": ["Food"]
-    }
-
 
     return (
         <View style={styles.map}>
@@ -54,12 +56,20 @@ const Map: React.FC<Props> = ({
             </View>
             <View style={styles.vendorScroll}>
             <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={1}>
-                <VendorComponent specialties={specialties}/>
-                <VendorComponent specialties={specialties}/>
-                <VendorComponent specialties={specialties}/>
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                scrollEventThrottle={1}>
+
+                    {vendorData.map((vendor, key) => {
+                        return (
+                            <VendorComponent specialties={vendor.specialities}
+                                             hours={vendor.hours}
+                                             name={vendor.name}
+                                             rating={vendor.rating}
+                                             address={vendor.address}
+                                             key={key}/>
+                        )
+                    })}
             </ScrollView>
             </View>
             
