@@ -59,7 +59,7 @@ const Map: React.FC<Props> = ({
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 scrollEventThrottle={1}>
-
+                    
                     {vendorData.map((vendor, key) => {
                         return (
                             <VendorComponent specialties={vendor.specialities}

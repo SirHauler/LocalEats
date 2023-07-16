@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect, useCallback} from 'react';
 import {
-    RefreshControl,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -69,7 +69,6 @@ const Explore: React.FC<Props> = ({
                                     onRefresh={onRefresh}/>
                 }
             >
-            
                 <View style={appStyles.container}>
                     <Text style={appStyles.header}>
                         Explore

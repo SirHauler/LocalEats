@@ -56,9 +56,9 @@ const AuthProvider= (props: AuthProps) => {
     // perform logout logic and clear user state
     try {
       await Auth.signOut()
-      setUser(null)
       router.back()
       router.replace("/authentication/SignIn")
+      setUser(null)
       console.log("User Logged Out: " + user)
     } catch (error) {
       console.log(error)

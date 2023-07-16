@@ -45,6 +45,7 @@ const Settings: React.FC<Props> = ({
                     <View style={styles.userAttributesView}>
                         <Text style={styles.userAttributesText}>{attributes.name} {attributes.family_name}</Text>
                         <Text style={styles.userAttributesText}>{attributes.email}</Text>
+                        <Text style={styles.userAttributesText}>Placeholder</Text>
                     </View>
 
                     <View>

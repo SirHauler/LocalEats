@@ -10,10 +10,21 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+
+
 export type Props = {
     specialties: [], 
-    hours: object, 
+    hours: [
+        Monday : {
+            open: string, 
+            close: string, 
+        }, 
+        Tuesday: {
+            open: string, 
+            close: string, 
+        }
+    ]
+    // TODO: check if the above is all good :)
     name: string | undefined | null,
     rating: number, 
     address: {
@@ -23,7 +34,7 @@ export type Props = {
             city: string, 
             state: string,
         }
-    } | string 
+    } | string | null | undefined
 }
 const VendorComponent: React.FC<Props> =  ({
     specialties, 
@@ -49,7 +60,7 @@ const VendorComponent: React.FC<Props> =  ({
         setSpecials(res)
     }, [])
     return (
-        <TouchableOpacity style={styles.vendorBox}>
+        <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}>
             <View style={styles.vendorItemContainer}>
                 <View style={styles.starAndRatingContainer}>
                     <View style={styles.circle}>
@@ -58,11 +69,6 @@ const VendorComponent: React.FC<Props> =  ({
                     <View style={styles.stars}>
                     <Text>
                         {rating}/5
-                        {/* <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/>
-                        <Ionicons name='star' size={12}/> */}
                     </Text>
                     </View>
                 </View>
@@ -88,14 +94,14 @@ const VendorComponent: React.FC<Props> =  ({
 const styles = StyleSheet.create({
     vendorItemContainer: {
         flexDirection: 'row',  
-        backgroundColor: 'grey', 
+        backgroundColor: '#89959c', 
         borderRadius: 10, 
         flex: 1, 
         width: 300, 
         overflow: 'hidden', 
     }, 
     vendorBox: {
-        height: 100, 
+        height: 120, 
         // backgroundColor: 'white', 
         margin: 10, 
         borderRadius: 10,

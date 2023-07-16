@@ -31,6 +31,7 @@ export type Props = {
 
 }
 
+
 const Profile:React.FC<Props> = ({
 
 }) => {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     foodItemText: {
         fontSize: 20, 
         margin: 3
-    }
+    }, 
 })
 
 export default Profile; 
