@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import React, {useState, useContext, useEffect} from 'react';
 import {
   SafeAreaView,
@@ -10,7 +11,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 
 export type Props = {
     specialties: [], 
@@ -43,6 +43,7 @@ const VendorComponent: React.FC<Props> =  ({
     rating, 
     address, 
 }) => {
+    const router = useRouter();
     const [specials, setSpecials] = useState('')
     const [open, setOpen] = useState(hours["Monday"]["Open"])
     const [close, setClose] = useState(hours["Monday"]["Close"])
@@ -60,7 +61,14 @@ const VendorComponent: React.FC<Props> =  ({
         setSpecials(res)
     }, [])
     return (
-        <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}>
+        <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
+            onPress={() => router.push({pathname: '/vendor/VendorPage', params: {
+                name: name, 
+                specialties: specials, 
+                hours: hours,
+                rating: rating,
+                address: address,
+            }})}>
             <View style={styles.vendorItemContainer}>
                 <View style={styles.starAndRatingContainer}>
                     <View style={styles.circle}>

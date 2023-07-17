@@ -35,12 +35,6 @@ const Explore: React.FC<Props> = ({
     const [vendorData, setVendorData] = useState<LazyVendorInfo[]>([]);
     const [refreshing, setRefreshing] = useState(false);
 
-//     const sub = DataStore.observeQuery(VendorInfo, (c) =>
-//     c.id.eq('e4dd1dc5-e85c-4566-8aaa-54a801396456')
-//   ).subscribe(({ items }) => {
-//     setVendorData(items);
-//   });
-
     useEffect(() => {
         // console.log("Vendors: \n" + JSON.stringify(vendorData))
         fetchVendors(setVendorData)
@@ -48,6 +42,7 @@ const Explore: React.FC<Props> = ({
             console.log(msg.model, msg.opType, msg.element);
             onRefresh(); //
         });
+
         return() => {
             sub.unsubscribe()
         }

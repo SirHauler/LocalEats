@@ -54,6 +54,12 @@ const Settings: React.FC<Props> = ({
                         >
                             <Text style={{fontSize: 20, fontWeight: '500'}}> Logout </Text>
                         </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.logoutButton}
+                            onPress={() => router.push("vendor/VendorPage")}
+                        >
+                            <Text style={{fontSize: 20, fontWeight: '500'}}> Vendor Page Test! </Text>
+                        </TouchableOpacity>
                     </View>
 
                 </View>

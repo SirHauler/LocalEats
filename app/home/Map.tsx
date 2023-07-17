@@ -33,6 +33,7 @@ const Map: React.FC<Props> = ({
         fetchVendors(setVendorData) 
         // console.log("Vendors: \n" + JSON.stringify(vendorData))
     }, [])
+    
     const sfRegion = {
         latitude: 37.78825,
         longitude: -122.4324,

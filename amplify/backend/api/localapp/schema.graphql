@@ -1,8 +1,31 @@
-type VendorInfo @model @auth(rules: [{allow: public}]) {
+type BusinessHoursJSON {
+  close: Int
+  open: Int
+}
+
+type HoursJSON {
+  monday: BusinessHoursJSON
+  tuesday: BusinessHoursJSON
+  wednesday: BusinessHoursJSON
+  thursday: BusinessHoursJSON
+  friday: BusinessHoursJSON
+  saturday: BusinessHoursJSON
+  sunday: BusinessHoursJSON
+}
+
+type AddressJSON {
+  zipcode: Int
+  streetAddress: String
+  city: String
+  state: String
+}
+
+type VendorInfo @model @auth(rules: [{allow: private}]) {
   id: ID!
-  specialities: AWSJSON
+  userid: ID
+  specialties: AWSJSON
   rating: Float
-  hours: AWSJSON
-  address: AWSJSON
+  hours: HoursJSON
+  address: AddressJSON
   name: String
 }

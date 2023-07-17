@@ -4,8 +4,11 @@ import { schema } from './schema';
 
 
 
-const { VendorInfo } = initSchema(schema);
+const { VendorInfo, BusinessHoursJSON, HoursJSON, AddressJSON } = initSchema(schema);
 
 export {
-  VendorInfo
+  VendorInfo,
+  BusinessHoursJSON,
+  HoursJSON,
+  AddressJSON
 };
