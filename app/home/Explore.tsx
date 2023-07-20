@@ -36,6 +36,7 @@ const Explore: React.FC<Props> = ({
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
+        // console.log("What" + vendorData[0].specialties)
         // console.log("Vendors: \n" + JSON.stringify(vendorData))
         fetchVendors(setVendorData)
         const sub = DataStore.observe(VendorInfo).subscribe(msg => {
@@ -71,7 +72,7 @@ const Explore: React.FC<Props> = ({
                     <View>
                     {vendorData.map((vendor, key) => {
                         return (<VendorComponent 
-                            specialties={vendor.specialities}
+                            specialties={vendor.specialties}
                             hours={vendor.hours}
                             name={vendor.name}
                             rating={vendor.rating}

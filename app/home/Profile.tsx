@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {
+    Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -19,6 +20,7 @@ import { AuthContext } from '../../util/AuthProvider';
 import { useServerState } from 'expo-router/src/static/useServerState';
 import { Auth } from 'aws-amplify';
 import currentUser from '../../util/currentUser';
+import { useRouter } from 'expo-router';
 
 const foodTypes = [
     "Tacos", 
@@ -36,10 +38,15 @@ const Profile:React.FC<Props> = ({
 
 }) => {
 
+    const router = useRouter();
+
     return (
        <SafeAreaView style={{flex: 1}}>
             <ScrollView>
                 <View style={appStyles.container}>
+                    <Pressable onPress={() => router.push('vendor/CreateBusinessForm')}>
+                        <Text>Create Business Form</Text>
+                    </Pressable>
                     <View style={styles.preferenceContainer}>
                         {foodTypes.map((food, key) => {
                             return (

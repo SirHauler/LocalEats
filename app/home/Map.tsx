@@ -33,7 +33,7 @@ const Map: React.FC<Props> = ({
         fetchVendors(setVendorData) 
         // console.log("Vendors: \n" + JSON.stringify(vendorData))
     }, [])
-    
+
     const sfRegion = {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -63,7 +63,9 @@ const Map: React.FC<Props> = ({
                     
                     {vendorData.map((vendor, key) => {
                         return (
-                            <VendorComponent specialties={vendor.specialities}
+                            <VendorComponent 
+                                             userid={vendor.userid}
+                                             specialties={vendor.specialties}
                                              hours={vendor.hours}
                                              name={vendor.name}
                                              rating={vendor.rating}

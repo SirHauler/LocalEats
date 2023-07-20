@@ -11,32 +11,21 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { AddressJSON, HoursJSON } from '../src/models';
+import getDayOfWeek from '../util/getDayOfWeek';
+
 
 export type Props = {
-    specialties: [], 
-    hours: [
-        Monday : {
-            open: string, 
-            close: string, 
-        }, 
-        Tuesday: {
-            open: string, 
-            close: string, 
-        }
-    ]
+    userid: string,
+    specialties: [] | undefined, 
+    hours: HoursJSON
     // TODO: check if the above is all good :)
     name: string | undefined | null,
     rating: number, 
-    address: {
-        address: {
-            zipcode: string, 
-            streetAddress: string, 
-            city: string, 
-            state: string,
-        }
-    } | string | null | undefined
+    address: AddressJSON | null
 }
 const VendorComponent: React.FC<Props> =  ({
+    userid, 
     specialties, 
     hours,
     name, 
@@ -44,10 +33,11 @@ const VendorComponent: React.FC<Props> =  ({
     address, 
 }) => {
     const router = useRouter();
-    const [specials, setSpecials] = useState('')
-    const [open, setOpen] = useState(hours["Monday"]["Open"])
-    const [close, setClose] = useState(hours["Monday"]["Close"])
-    // const [address, setAddress] = useState(address)
+    const todaysHours: number[] = getDayOfWeek(hours);
+    const [specials, setSpecials] = useState(''); 
+    const [open, setOpen] = useState(todaysHours[0])
+    const [close, setClose] = useState(todaysHours[1])
+    
     useEffect(() => {
         let res = ""
         for (let i = 0; i < specialties.length; i++) {
@@ -56,10 +46,10 @@ const VendorComponent: React.FC<Props> =  ({
             } else {
                 res += specialties[i] + ", "
             }
-            
         }
         setSpecials(res)
     }, [])
+
     return (
         <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
             onPress={() => router.push({pathname: '/vendor/VendorPage', params: {
@@ -89,7 +79,8 @@ const VendorComponent: React.FC<Props> =  ({
                         {specials}
                     </Text>
 
-                    <Text style={styles.vendorText}>{address.address.streetAddress}</Text>
+                    <Text style={styles.vendorText}>{address?.streetAddress}</Text>
+                    <Text style={styles.vendorText}>Placeholder Address</Text>
 
                     <Text style={styles.vendorText}>Open: {open} - {close}</Text>
                 </View>
