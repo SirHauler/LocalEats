@@ -65,6 +65,7 @@ const Map: React.FC<Props> = ({
                         return (
                             <VendorComponent 
                                              userid={vendor.userid}
+                                             id={vendor.id}
                                              specialties={vendor.specialties}
                                              hours={vendor.hours}
                                              name={vendor.name}

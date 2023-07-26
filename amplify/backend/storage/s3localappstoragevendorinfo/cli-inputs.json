@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3localappstoragevendorinfo",
+  "bucketName": "localapp-storage-vendor-info",
+  "policyUUID": "b2a32988",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

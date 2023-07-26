@@ -15,14 +15,14 @@ interface TagProps {
 
 export default function Tag(TagProps: any) {  
 
-    const removeTag = (key: string) => {
+    const removeTag = () => {
         const newTags = TagProps.tags.filter((tag: any) => tag.key !== TagProps.index);
         TagProps.setTags(newTags); 
     }
     return (
     <View style={styles.tag}>
         <Text>{TagProps.children}</Text>
-        <Pressable style={styles.deleteButton} onPress={() => removeTag(TagProps.key)}>
+        <Pressable style={styles.deleteButton} onPress={() => removeTag()}>
             <Ionicons name="close" size={15} color="black" />
         </Pressable>
     </View>

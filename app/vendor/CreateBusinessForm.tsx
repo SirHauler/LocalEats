@@ -5,6 +5,9 @@ import baseStyle from '../../assets/baseStyles';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import Tag from '../../util/Tag';
+import { DataStore } from 'aws-amplify';
+import { VendorInfo } from '../../src/models';
+import { AuthContext } from '../../util/AuthProvider';
 
 interface CreateBusinessFormProps {
     
@@ -14,15 +17,77 @@ const CreateBusinessForm = (props: CreateBusinessFormProps) => {
   
   const router = useRouter(); 
 
-  const [specialties, setSpecialties] = useState([]); 
-
+  const [specialties, setSpecialties] = useState<object>([]);
   const [special, setSpecial] = useState("Pupusas");
   const [address, setAddress] = useState("123 Main St");
-
+  const [zipcode, setZipcode] = useState("12345");
+  const [state, setState] = useState("CA");
+  const [city, setCity] = useState("San Francisco");
+  const [businessName, setBusinessName] = useState("Pupusas");
   const addElement = () => {
     if (special !== "") {
       setSpecialties([...specialties, {key: special}]);
       setSpecial(""); // reset 
+    }
+  }
+
+
+  async function createVendor () {
+    try {
+    let arr_specialties = 
+    specialties.forEach(element => {
+      arr_specialties += element.key + ", "
+    });
+
+    const num_zipcode = parseInt(zipcode); 
+
+    await DataStore.save(
+      new VendorInfo({
+        userid: "Random",
+        specialties: [{specialties}],
+        rating: 3.5, 
+        hours: {
+          "monday": {
+            "open": 8, 
+            "close": 17
+          }, 
+          "tuesday": {
+            "open": 8,
+            "close": 17
+          }, 
+          "wednesday": {
+            "open": 8,
+            "close": 17
+          }, 
+          "thursday": {
+            "open": 8,
+            "close": 17
+          }, 
+          "friday": {
+            "open": 8,
+            "close": 17
+          }, 
+          "saturday": {
+            "open": 8,
+            "close": 17
+          }, 
+          "sunday": {
+            "open": 8,
+            "close": 17
+          }
+        }, 
+        address: {
+          zipcode: num_zipcode,
+          streetAddress: address,
+          city: city, 
+          state: state
+        }, 
+        name: businessName
+      })
+    )
+      
+    } catch (error) {
+      console.log(error)
     }
   }
   
@@ -36,7 +101,8 @@ const CreateBusinessForm = (props: CreateBusinessFormProps) => {
                     placeholder="Name of Business"
                     placeholderTextColor="#003f5c" 
                     autoComplete='email'
-                    onChangeText={() => {}}/>
+                    value={businessName}
+                    onChangeText={(businessName) => {setBusinessName(businessName)}}/>
             </View>
 
 
@@ -82,17 +148,42 @@ const CreateBusinessForm = (props: CreateBusinessFormProps) => {
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
-                    placeholder="Last Name"
+                    placeholder="City"
                     placeholderTextColor="#003f5c"
-                    onChangeText={() => {}}
+                    value={city}
+                    onChangeText={(city) => {setCity(city)}}
                 />
             </View>
+
+            <View style={styles.inputView}>
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder="Zip Code"
+                    placeholderTextColor="#003f5c"
+                    value={zipcode}
+                    inputMode="numeric"
+                    onChangeText={(zipcode) => {setZipcode(zipcode)}}
+                />
+            </View>
+
+
+            <View style={styles.inputView}>
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder="State"
+                    placeholderTextColor="#003f5c"
+                    value={state}
+                    onChangeText={(state) => {setState(state)}}
+                />
+            </View>
+
+            <Text style={baseStyle.smallTextAuth}>Hours</Text>
 
             <TouchableOpacity>
                 <Text style={baseStyle.smallTextAuth} onPress={() => router.back()}>Back</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={() => {}}>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => {createVendor()}}>
                 <Text style={baseStyle.smallTextAuthButton}>Continue</Text>
             </TouchableOpacity>
           

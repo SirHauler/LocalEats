@@ -72,6 +72,8 @@ const Explore: React.FC<Props> = ({
                     <View>
                     {vendorData.map((vendor, key) => {
                         return (<VendorComponent 
+                            userid = {vendor.userid}
+                            id = {vendor.id}
                             specialties={vendor.specialties}
                             hours={vendor.hours}
                             name={vendor.name}

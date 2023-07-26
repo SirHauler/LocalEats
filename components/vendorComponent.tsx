@@ -17,6 +17,7 @@ import getDayOfWeek from '../util/getDayOfWeek';
 
 export type Props = {
     userid: string,
+    id: string, 
     specialties: [] | undefined, 
     hours: HoursJSON
     // TODO: check if the above is all good :)
@@ -26,6 +27,7 @@ export type Props = {
 }
 const VendorComponent: React.FC<Props> =  ({
     userid, 
+    id, 
     specialties, 
     hours,
     name, 
@@ -53,11 +55,7 @@ const VendorComponent: React.FC<Props> =  ({
     return (
         <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
             onPress={() => router.push({pathname: '/vendor/VendorPage', params: {
-                name: name, 
-                specialties: specials, 
-                hours: hours,
-                rating: rating,
-                address: address,
+                vendorID: id,
             }})}>
             <View style={styles.vendorItemContainer}>
                 <View style={styles.starAndRatingContainer}>
