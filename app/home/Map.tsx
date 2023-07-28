@@ -25,13 +25,19 @@ export type Props = {
 
 }
 
+type Location = {
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+}
+
 const Map: React.FC<Props> = ({
 
 }) => {
     const [vendorData, setVendorData] = useState<LazyVendorInfo[]>([]);
     useEffect(() => {
-        fetchVendors(setVendorData) 
-        // console.log("Vendors: \n" + JSON.stringify(vendorData))
+        fetchVendors(setVendorData)
     }, [])
 
     const sfRegion = {
@@ -41,13 +47,15 @@ const Map: React.FC<Props> = ({
         longitudeDelta: 0.0421,
     }
 
+    const [focusedLocation, setFocusedLocation] = useState<Location> (sfRegion); 
+
     return (
         <View style={styles.map}>
             <MapView style={{flex: 1}} provider="google"
-                        initialRegion={sfRegion}
+                        initialRegion={focusedLocation}
                         
                 >
-                    <Marker coordinate={sfRegion}
+                    <Marker coordinate={focusedLocation}
 
                     />
             </MapView>

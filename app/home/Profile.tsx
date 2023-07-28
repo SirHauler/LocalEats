@@ -44,11 +44,8 @@ const Profile:React.FC<Props> = ({
        <SafeAreaView style={{flex: 1}}>
             <ScrollView>
                 <View style={appStyles.container}>
-                    <Pressable onPress={() => router.push('vendor/CreateBusinessForm')}>
-                        <Text>Create Business Form</Text>
-                    </Pressable>
                     <View style={styles.preferenceContainer}>
-                        {foodTypes.map((food, key) => {
+                        {/* {foodTypes.map((food, key) => {
                             return (
                                 <View style={styles.foodItemContainer} key={key}>
                                     <TouchableOpacity style={styles.foodItemButton}>
@@ -56,7 +53,7 @@ const Profile:React.FC<Props> = ({
                                     </TouchableOpacity>
                                 </View>
                             )
-                        })}
+                        })} */}
                     </View>
                 </View>
             </ScrollView>

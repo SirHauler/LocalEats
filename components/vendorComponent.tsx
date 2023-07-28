@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, {useState, useContext, useEffect} from 'react';
 import {
+    Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -53,7 +54,7 @@ const VendorComponent: React.FC<Props> =  ({
     }, [])
 
     return (
-        <TouchableOpacity style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
+        <Pressable style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
             onPress={() => router.push({pathname: '/vendor/VendorPage', params: {
                 vendorID: id,
             }})}>
@@ -84,7 +85,7 @@ const VendorComponent: React.FC<Props> =  ({
                 </View>
 
             </View>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     vendorItemContainer: {
         flexDirection: 'row',  
         backgroundColor: '#89959c', 
-        borderRadius: 10, 
+        borderRadius: 5, 
         flex: 1, 
         width: 300, 
         overflow: 'hidden', 

@@ -13,25 +13,68 @@ import {
     ActivityIndicator
   } from 'react-native';
 
+import Carousel from 'react-native-reanimated-carousel';
 
-const specialties = [
-  "Mexican",
-  "Italian",
-  "American"
-]
+const colors = [
+  "#26292E",
+  "#899F9C",
+  "#B3C680",
+  "#5C6265",
+  "#F5D399",
+  "#F1F1F1",
+];
 
 import { DataStore, Storage } from 'aws-amplify';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import appStyles from '../../assets/appStyles';
 import { VendorInfo, VendorInfoMetaData } from '../../src/models';
+import { set } from 'react-native-reanimated';
 
 
 async function getVendorInfo(vendorID: string, setVendorInfo: React.Dispatch<React.SetStateAction<object>>) {
   // get vendorinfo using DataStore
   const vendorInfo = await DataStore.query(VendorInfo, (c) => c.id.eq(vendorID));
-  console.log("VendorInfo: " + JSON.stringify(vendorInfo));
   setVendorInfo(vendorInfo[0]);
 }
+
+
+const photoCarousel = (photoURIs: any) =>{
+
+  if (photoURIs.length == 0) {
+    return (
+    <Text style={{fontSize: 20}}>No Photos, Yet...📷</Text>
+    )
+  }
+
+  return (
+    <View style={{}}>
+    <Carousel
+        loop
+        width={350}
+        height={225}
+        autoPlay={false}
+        data={photoURIs}
+        scrollAnimationDuration={4000}
+        onSnapToItem={(color) => console.log('current index:', color)}
+        renderItem={({ item }) => (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                }}
+            >
+                <Image source={{uri: item.photoURI}}
+                  style={styles.image}
+                />
+            </View>
+        )
+      }
+    />
+  </View>
+  )
+}
+
+
 
 export type Props = {
 
@@ -41,10 +84,10 @@ export type Props = {
     
     const router = useRouter();
     const {vendorID} = useLocalSearchParams();
-    const [photos, setPhotos] = useState(null);
-    const [photoURI, setPhotoURI] = useState(null);
     const [vendorInfo, setVendorInfo] = useState<VendorInfo>();
     const [specials, setSpecials] = useState("");
+    const [photoURIs, setPhotoURIs] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
       getVendorInfo(vendorID, setVendorInfo); 
     }, [])
@@ -61,24 +104,37 @@ export type Props = {
       setSpecials(res)
     }, [vendorInfo])
 
-    function getPhotos() {
-      const list_of_photos = Storage.list('vendors/photos/lacentroamericana/', {
-        pageSize: 'ALL'
-      })
-        .then(result => {
-          setPhotos(result); 
-          const filteredPhotos = result.results.filter((photo) => photo.size > 0);
-          Storage.get(filteredPhotos[0].key)
-            .then(res => {setPhotoURI(res)
-                  console.log(" Photo: " + res)})
-            .catch(err => console.log(err));
-        })
-        .catch(err => console.log(err));
-    }
-
     useEffect(() => {
-      getPhotos();
-      console.log(vendorInfo?.specialties)
+      const fetchPhotos = async () => {
+
+        try {
+          const query = "vendors/photos/" + vendorID + "/";  
+          const photos = await Storage.list(query, {
+            pageSize: 'ALL'
+          });
+          const filteredPhotos = photos.results.filter((photo) => photo.size > 0);
+          const photoKeys = filteredPhotos.map((photo) => photo.key)
+          const photoURIs_arr = await Promise.all(photoKeys.map(fetchPhotoURI)); 
+          setLoading(false);
+          setPhotoURIs(photoURIs_arr);
+        } catch (error) {
+          console.log(error);
+        }
+        
+      }
+
+      const fetchPhotoURI = async (photoKey: string) => {
+        try {
+          const photoURI = await Storage.get(photoKey);
+          return {photoURI: photoURI};
+        } catch (error) {
+          console.error('Error fetching photo URI:', error);
+          return null;
+        }
+      };
+
+      fetchPhotos(); 
+
     }, []); 
     
     return (
@@ -99,20 +155,16 @@ export type Props = {
           <View style={styles.photoView}>
 
           {
-            photoURI == null ? (
+            loading ? (
               <ActivityIndicator size="large" color="#999999" />
             ): (
-              
-                <Image source={{uri: photoURI}}
-                  style={styles.image}
-                />
+              photoCarousel(photoURIs)
             )
           }
 
           </View>
-          
 
-          
+
               <View style={{alignItems: 'center', paddingTop: 15,}}>
             
             <Text style={{fontSize: 18}}>{specials}</Text>

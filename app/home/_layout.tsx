@@ -5,6 +5,7 @@ import { Text, StyleSheet, TouchableOpacity } from "react-native"
 import { AuthContext } from "../../util/AuthProvider";
 import currentUser from "../../util/currentUser";
 import { useRouter } from "expo-router";
+
 export default function Layout() {
   const [username, setUsername] = useState('')
   const router = useRouter()

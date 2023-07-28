@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {
+    Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -48,17 +49,15 @@ const Settings: React.FC<Props> = ({
                         <Text style={styles.userAttributesText}>Placeholder</Text>
                     </View>
 
+                    <Pressable onPress={() => router.push('vendor/CreateBusinessForm')}>
+                        <Text>Create Business Form</Text>
+                    </Pressable>
+
                     <View>
                         <TouchableOpacity style={styles.logoutButton}
                             onPress={() => logout()}
                         >
                             <Text style={{fontSize: 20, fontWeight: '500'}}> Logout </Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.logoutButton}
-                            onPress={() => router.push("vendor/VendorPage")}
-                        >
-                            <Text style={{fontSize: 20, fontWeight: '500'}}> Vendor Page Test! </Text>
                         </TouchableOpacity>
                     </View>
 
