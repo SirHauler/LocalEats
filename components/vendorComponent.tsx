@@ -17,14 +17,14 @@ import getDayOfWeek from '../util/getDayOfWeek';
 
 
 export type Props = {
-    userid: string,
-    id: string, 
-    specialties: [] | undefined, 
-    hours: HoursJSON
+    userid: string | null | undefined,
+    id: string | undefined | null,
+    specialties: [] | undefined | null,
+    hours: HoursJSON | undefined | null,
     // TODO: check if the above is all good :)
     name: string | undefined | null,
-    rating: number, 
-    address: AddressJSON | null
+    rating: number | undefined | null,
+    address: AddressJSON | undefined | null,
 }
 const VendorComponent: React.FC<Props> =  ({
     userid, 

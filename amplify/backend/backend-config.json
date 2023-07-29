@@ -1,5 +1,19 @@
 {
   "api": {
+    "LocalEatsGeocodingAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "LocalEatsGeocodingHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "localapp": {
       "dependsOn": [
         {
@@ -62,6 +76,32 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "LocalEatsGeocodingHandler": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_LocalEatsGeocodingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LocalEatsGeocodingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_LocalEatsGeocodingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LocalEatsGeocodingHandler"
+        }
+      ]
     }
   },
   "storage": {

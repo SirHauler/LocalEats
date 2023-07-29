@@ -9,17 +9,25 @@
       "UnauthRoleName": "amplify-localapp-dev-173425-unauthRole",
       "StackName": "amplify-localapp-dev-173425",
       "StackId": "arn:aws:cloudformation:us-west-1:606334921381:stack/amplify-localapp-dev-173425/7775da40-c912-11ed-b5fc-02cec297ca89",
-      "AmplifyAppId": "d28qdszvyrrp6"
+      "AmplifyAppId": "d28qdszvyrrp6",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-localapp-dev-173425-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "localapp": {}
       },
       "api": {
-        "localapp": {}
+        "localapp": {},
+        "LocalEatsGeocodingAPI": {}
       },
       "storage": {
         "s3localappstoragevendorinfo": {}
+      },
+      "function": {
+        "LocalEatsGeocodingHandler": {
+          "deploymentBucketName": "amplify-localapp-dev-173425-deployment",
+          "s3Key": "amplify-builds/LocalEatsGeocodingHandler-6146524f3031792f7679-build.zip"
+        }
       }
     }
   }
