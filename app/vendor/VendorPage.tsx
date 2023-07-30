@@ -10,25 +10,16 @@ import {
     StyleSheet, 
     View, 
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    FlatList
   } from 'react-native';
 
 import Carousel from 'react-native-reanimated-carousel';
-
-const colors = [
-  "#26292E",
-  "#899F9C",
-  "#B3C680",
-  "#5C6265",
-  "#F5D399",
-  "#F1F1F1",
-];
-
 import { DataStore, Storage } from 'aws-amplify';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import appStyles from '../../assets/appStyles';
 import { VendorInfo, VendorInfoMetaData } from '../../src/models';
-import { set } from 'react-native-reanimated';
+import { VendorReviewItem } from '../../components/Vendor/VendorReviewItem';
 
 
 async function getVendorInfo(vendorID: string, setVendorInfo: React.Dispatch<React.SetStateAction<object>>) {
@@ -37,6 +28,24 @@ async function getVendorInfo(vendorID: string, setVendorInfo: React.Dispatch<Rea
   setVendorInfo(vendorInfo[0]);
 }
 
+
+const DirectionButtons = () => {
+  return (
+    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={styles.googleMapsButtonView}>
+        <Pressable style={styles.googleMapsButton}>
+          <Text>See On Map</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.googleMapsButtonView}>
+        <Pressable style={styles.googleMapsButton}>
+          <Text>Directions</Text>
+        </Pressable>
+      </View>
+    </View>
+  )
+}
 
 const photoCarousel = (photoURIs: any) =>{
 
@@ -75,6 +84,12 @@ const photoCarousel = (photoURIs: any) =>{
 }
 
 
+
+const reviews = [
+  {key: '1'}, 
+  {key: '2'},
+  {key: '3'},
+]
 
 export type Props = {
 
@@ -166,25 +181,26 @@ export type Props = {
 
 
               <View style={{alignItems: 'center', paddingTop: 15,}}>
-            
-            <Text style={{fontSize: 18}}>{specials}</Text>
-
-          
+                  <Text style={{fontSize: 18}}>{specials}</Text>
               </View>
 
 
-            <View style={styles.googleMapsButtonView}>
-              <Pressable style={styles.googleMapsButton}>
-                <Text>Google Maps</Text>
-              </Pressable>
-            </View>
+            <DirectionButtons/>
 
 
             <View>
               <Text style={[appStyles.header, {fontSize: 25}]}>Reviews</Text>
             </View>
 
-            <Pressable style={{paddingTop: 300}} onPress={() => router.back()}>
+
+            {
+              reviews.map((review) => {
+                return (
+                  <VendorReviewItem key={review.key}/>)
+              })
+            }
+
+            <Pressable style={{paddingTop: 30}} onPress={() => router.back()}>
                <Text>Go Back!</Text>
             </Pressable>
           </View>
@@ -226,6 +242,7 @@ export type Props = {
 
     googleMapsButtonView: {
       alignItems: 'center',
+      margin: 5
     }, 
 
     googleMapsButton: { 

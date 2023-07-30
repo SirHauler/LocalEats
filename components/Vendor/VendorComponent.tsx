@@ -12,8 +12,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { AddressJSON, HoursJSON } from '../src/models';
-import getDayOfWeek from '../util/getDayOfWeek';
+import { AddressJSON, HoursJSON } from '../../src/models';
+import getDayOfWeek from '../../util/getDayOfWeek';
 
 
 export type Props = {

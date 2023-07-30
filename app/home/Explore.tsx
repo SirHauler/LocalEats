@@ -13,16 +13,12 @@ import {
 } from 'react-native';
 
 // import { Auth } from 'aws-amplify';
-import { useNavigation } from '@react-navigation/native';
-import AlertItem from '../../components/alertItem';
+
 import appStyles from '../../assets/appStyles';
-import { AuthContext } from '../../util/AuthProvider';
 import { useServerState } from 'expo-router/src/static/useServerState';
-import { API, Auth, DataStore, graphqlOperation} from 'aws-amplify';
-import { GraphQLSubscription } from '@aws-amplify/api';
-import { onCreateTodo } from './graphql/subscriptions';
-import { OnCreateTodoSubscription } from './API';
-import VendorComponent from '../../components/vendorComponent';
+import { API, Auth, DataStore} from 'aws-amplify';
+
+import VendorComponent from '../../components/Vendor/VendorComponent';
 import { LazyVendorInfo, VendorInfo } from '../../src/models';
 import fetchVendors from '../../util/fetchVendors';
 export type Props = {
@@ -36,8 +32,6 @@ const Explore: React.FC<Props> = ({
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
-        // console.log("What" + vendorData[0].specialties)
-        // console.log("Vendors: \n" + JSON.stringify(vendorData))
         fetchVendors(setVendorData)
         const sub = DataStore.observe(VendorInfo).subscribe(msg => {
             console.log(msg.model, msg.opType, msg.element);

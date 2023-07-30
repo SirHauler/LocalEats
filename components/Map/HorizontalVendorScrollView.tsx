@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { LazyVendorInfo } from '../../src/models';
-import VendorComponent from '../vendorComponent';
+import VendorComponent from '../Vendor/VendorComponent';
 export interface HorizontalVendorScrollViewProps {
     vendorData: LazyVendorInfo[]
 }

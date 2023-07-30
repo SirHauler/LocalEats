@@ -8,7 +8,6 @@ import {
 
 
 import MapView, { Marker } from 'react-native-maps';
-import VendorComponent from '../../components/vendorComponent';
 import { LazyVendorInfo } from '../../src/models';
 import fetchVendors from '../../util/fetchVendors';
 import { SearchBar } from '../../components/Map/SearchBar';
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
         flex: 1
     }, 
 })
+
 
 
 

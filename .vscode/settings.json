@@ -1,3 +1,5 @@
 {
-    "workbench.preferredDarkColorTheme": "Default Dark Modern"
+    "workbench.preferredDarkColorTheme": "Default Dark Modern", 
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true
 }

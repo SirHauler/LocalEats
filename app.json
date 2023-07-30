@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "local-app", 
+    "scheme": "local-app",
     "name": "local-app",
     "slug": "local-app",
     "version": "1.0.0",
@@ -27,6 +27,9 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
