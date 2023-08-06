@@ -11,7 +11,6 @@ Pressable,
 } from 'react-native';
 import { AddressJSON, HoursJSON } from '../../src/models';
 import getDayOfWeek from '../../util/getDayOfWeek';
-import getReviews from '../../util/getReviews';
 import { specials_to_string } from '../../util/specials_to_string';
 
 

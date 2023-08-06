@@ -15,7 +15,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { AuthContext } from '../../util/AuthProvider';
 import appStyles from '../../assets/appStyles';
-import {useFonts, Roboto_200Black} from '@expo-google-fonts/roboto'
+import {useFonts} from '@expo-google-fonts/roboto'
 
 export type Props = {
 
@@ -24,9 +24,7 @@ export type Props = {
 const Settings: React.FC<Props> = ({
 
 }) => {
-    let [fontsLoaded] = useFonts({
-        Roboto_200Black
-    })
+
     const router = useRouter()
     const { user, logout } = useContext(AuthContext)
     const {attributes} = user

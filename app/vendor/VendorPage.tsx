@@ -139,7 +139,7 @@ export type Props = {
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text style={[appStyles.header, {fontSize: 25}]}>Reviews</Text>
-              <Pressable>
+              <Pressable onPress={() => router.push("vendor/CreateReview")}>
                 <Ionicons name='add-circle-outline' size={30} style={{margin: 10}}/>
               </Pressable>
             </View>

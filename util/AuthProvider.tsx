@@ -11,15 +11,27 @@ type AuthContextState = {
   isLoggedIn: boolean
 }
 
+type User = {
+  attributes: {
+    name: string, 
+    family_name: string, 
+    email: string,
+  }
+}
+
 type AuthContextValue = {
-  user: object | null
+  user: User
   // setUser: Dispatch<SetStateAction<AuthContextState>>;
   login: (email: string, password: string) => void
   logout: () => void
 }
 
 export const AuthContext = createContext<AuthContextValue>({
-  user: {}, 
+  user: {attributes: {
+    name: "", 
+    family_name: "", 
+    email: ""
+  }}, 
   login: () => {}, 
   logout: () => {}, 
 });
