@@ -1,10 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, {useState, useContext, useEffect} from 'react';
 import {
-    Pressable,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+Pressable,
   StyleSheet,
   Text,
   TextInput, 
@@ -14,6 +11,8 @@ import {
 } from 'react-native';
 import { AddressJSON, HoursJSON } from '../../src/models';
 import getDayOfWeek from '../../util/getDayOfWeek';
+import getReviews from '../../util/getReviews';
+import { specials_to_string } from '../../util/specials_to_string';
 
 
 export type Props = {
@@ -21,7 +20,6 @@ export type Props = {
     id: string | undefined | null,
     specialties: [] | undefined | null,
     hours: HoursJSON | undefined | null,
-    // TODO: check if the above is all good :)
     name: string | undefined | null,
     rating: number | undefined | null,
     address: AddressJSON | undefined | null,
@@ -42,15 +40,7 @@ const VendorComponent: React.FC<Props> =  ({
     const [close, setClose] = useState(todaysHours[1])
     
     useEffect(() => {
-        let res = ""
-        for (let i = 0; i < specialties.length; i++) {
-            if (i == specialties.length - 1) {
-                res += specialties[i]
-            } else {
-                res += specialties[i] + ", "
-            }
-        }
-        setSpecials(res)
+        setSpecials(specials_to_string(specialties))
     }, [])
 
     return (

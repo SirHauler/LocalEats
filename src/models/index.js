@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { VendorInfo, BusinessHoursJSON, HoursJSON, AddressJSON } = initSchema(schema);
+const { Review, VendorInfo, BusinessHoursJSON, HoursJSON, AddressJSON } = initSchema(schema);
 
 export {
+  Review,
   VendorInfo,
   BusinessHoursJSON,
   HoursJSON,

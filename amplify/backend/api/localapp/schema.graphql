@@ -1,3 +1,12 @@
+type Review @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  user_id: ID
+  vendor_id: ID
+  rating: Float
+  comment: String
+  s3_photo_bucket_url: String
+}
+
 type BusinessHoursJSON {
   close: Int
   open: Int
@@ -29,3 +38,4 @@ type VendorInfo @model @auth(rules: [{allow: private}]) {
   address: AddressJSON
   name: String
 }
+ 

@@ -58,8 +58,40 @@ export declare type AddressJSON = LazyLoading extends LazyLoadingDisabled ? Eage
 
 export declare const AddressJSON: (new (init: ModelInit<AddressJSON>) => AddressJSON)
 
+type ReviewMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type VendorInfoMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EagerReview = {
+  readonly id: string;
+  readonly user_id?: string | null;
+  readonly vendor_id?: string | null;
+  readonly rating?: number | null;
+  readonly comment?: string | null;
+  readonly s3_photo_bucket_url?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyReview = {
+  readonly id: string;
+  readonly user_id?: string | null;
+  readonly vendor_id?: string | null;
+  readonly rating?: number | null;
+  readonly comment?: string | null;
+  readonly s3_photo_bucket_url?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Review = LazyLoading extends LazyLoadingDisabled ? EagerReview : LazyReview
+
+export declare const Review: (new (init: ModelInit<Review, ReviewMetaData>) => Review) & {
+  copyOf(source: Review, mutator: (draft: MutableModel<Review, ReviewMetaData>) => MutableModel<Review, ReviewMetaData> | void): Review;
 }
 
 type EagerVendorInfo = {

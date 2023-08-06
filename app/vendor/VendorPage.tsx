@@ -5,25 +5,22 @@ import {
     SafeAreaView, 
     ScrollView, 
     Text,
-    TextInput, 
-    TouchableOpacity, 
     StyleSheet, 
     View, 
-    Image,
     ActivityIndicator,
-    FlatList
   } from 'react-native';
 
-import Carousel from 'react-native-reanimated-carousel';
 import { DataStore, Storage } from 'aws-amplify';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import appStyles from '../../assets/appStyles';
-import { VendorInfo, VendorInfoMetaData } from '../../src/models';
+import { Review, VendorInfo } from '../../src/models';
 import { VendorReviewItem } from '../../components/Vendor/VendorReviewItem';
+import photoCarousel from '../../components/Vendor/PhotoCarousel';
+import getReviews from '../../util/getReviews';
+import { specials_to_string } from '../../util/specials_to_string';
 
 
 async function getVendorInfo(vendorID: string, setVendorInfo: React.Dispatch<React.SetStateAction<object>>) {
-  // get vendorinfo using DataStore
   const vendorInfo = await DataStore.query(VendorInfo, (c) => c.id.eq(vendorID));
   setVendorInfo(vendorInfo[0]);
 }
@@ -47,49 +44,6 @@ const DirectionButtons = () => {
   )
 }
 
-const photoCarousel = (photoURIs: any) =>{
-
-  if (photoURIs.length == 0) {
-    return (
-    <Text style={{fontSize: 20}}>No Photos, Yet...📷</Text>
-    )
-  }
-
-  return (
-    <View style={{}}>
-    <Carousel
-        loop
-        width={350}
-        height={225}
-        autoPlay={false}
-        data={photoURIs}
-        scrollAnimationDuration={4000}
-        onSnapToItem={(color) => console.log('current index:', color)}
-        renderItem={({ item }) => (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                }}
-            >
-                <Image source={{uri: item.photoURI}}
-                  style={styles.image}
-                />
-            </View>
-        )
-      }
-    />
-  </View>
-  )
-}
-
-
-
-const reviews = [
-  {key: '1'}, 
-  {key: '2'},
-  {key: '3'},
-]
 
 export type Props = {
 
@@ -103,21 +57,18 @@ export type Props = {
     const [specials, setSpecials] = useState("");
     const [photoURIs, setPhotoURIs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [reviews, setReviews] = useState<Review[]>([]); 
     useEffect(() => {
       getVendorInfo(vendorID, setVendorInfo); 
     }, [])
 
     useEffect(() => {
-      let res = ""
-      for (let i = 0; i < vendorInfo?.specialties.length; i++) {
-          if (i == vendorInfo?.specialties.length - 1) {
-              res += vendorInfo?.specialties[i]
-          } else {
-              res += vendorInfo?.specialties[i] + " • "
-          }
-      }
-      setSpecials(res)
-    }, [vendorInfo])
+      getReviews(vendorID, setReviews)
+    }, [])
+
+    useEffect(() => {
+      setSpecials(specials_to_string(vendorInfo?.specialties))
+    }, [])
 
     useEffect(() => {
       const fetchPhotos = async () => {
@@ -178,8 +129,6 @@ export type Props = {
           }
 
           </View>
-
-
               <View style={{alignItems: 'center', paddingTop: 15,}}>
                   <Text style={{fontSize: 18}}>{specials}</Text>
               </View>
@@ -188,15 +137,21 @@ export type Props = {
             <DirectionButtons/>
 
 
-            <View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text style={[appStyles.header, {fontSize: 25}]}>Reviews</Text>
+              <Pressable>
+                <Ionicons name='add-circle-outline' size={30} style={{margin: 10}}/>
+              </Pressable>
             </View>
 
-
             {
-              reviews.map((review) => {
+              reviews?.map((review) => {
                 return (
-                  <VendorReviewItem key={review.key}/>)
+                  <VendorReviewItem key={review.id}
+                    rating={review.rating}
+                    reviewerName="Josh"
+                    review={review.comment}
+                    />)
               })
             }
 
@@ -225,13 +180,6 @@ export type Props = {
       flexDirection: "row", 
       alignItems: 'center',
       marginLeft: 'auto',
-    }, 
-
-    image: {
-      width: 350, 
-      height: 225, 
-      borderRadius: 10,
-      marginTop: 10
     }, 
 
     photoView: {
