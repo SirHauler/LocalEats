@@ -16,6 +16,7 @@ type User = {
     name: string, 
     family_name: string, 
     email: string,
+    sub: string,
   }
 }
 
@@ -30,7 +31,8 @@ export const AuthContext = createContext<AuthContextValue>({
   user: {attributes: {
     name: "", 
     family_name: "", 
-    email: ""
+    email: "", 
+    sub: ""
   }}, 
   login: () => {}, 
   logout: () => {}, 

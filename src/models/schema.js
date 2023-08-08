@@ -14,28 +14,35 @@ export const schema = {
                     "name": "user_id",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "vendor_id": {
                     "name": "vendor_id",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "reviewerName": {
+                    "name": "reviewerName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "rating": {
                     "name": "rating",
                     "isArray": false,
                     "type": "Float",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "comment": {
                     "name": "comment",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "s3_photo_bucket_url": {
@@ -310,5 +317,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "c96fd75652f523cf98300915c043e8ba"
+    "version": "e82f31e8d1b0d2167dec089e5f73ec97"
 };

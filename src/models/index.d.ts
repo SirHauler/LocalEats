@@ -68,10 +68,11 @@ type VendorInfoMetaData = {
 
 type EagerReview = {
   readonly id: string;
-  readonly user_id?: string | null;
-  readonly vendor_id?: string | null;
-  readonly rating?: number | null;
-  readonly comment?: string | null;
+  readonly user_id: string;
+  readonly vendor_id: string;
+  readonly reviewerName: string;
+  readonly rating: number;
+  readonly comment: string;
   readonly s3_photo_bucket_url?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -79,10 +80,11 @@ type EagerReview = {
 
 type LazyReview = {
   readonly id: string;
-  readonly user_id?: string | null;
-  readonly vendor_id?: string | null;
-  readonly rating?: number | null;
-  readonly comment?: string | null;
+  readonly user_id: string;
+  readonly vendor_id: string;
+  readonly reviewerName: string;
+  readonly rating: number;
+  readonly comment: string;
   readonly s3_photo_bucket_url?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

@@ -58,6 +58,13 @@ export type Props = {
     const [photoURIs, setPhotoURIs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState<Review[]>([]); 
+
+    const handleCreateReviewButton = () => {
+      router.push({pathname: 'vendor/CreateReview', params: {
+        vendorID: vendorID,
+        vendorName: vendorInfo?.name
+    }})
+    }
     useEffect(() => {
       getVendorInfo(vendorID, setVendorInfo); 
     }, [])
@@ -139,7 +146,7 @@ export type Props = {
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text style={[appStyles.header, {fontSize: 25}]}>Reviews</Text>
-              <Pressable onPress={() => router.push("vendor/CreateReview")}>
+              <Pressable onPress={handleCreateReviewButton}>
                 <Ionicons name='add-circle-outline' size={30} style={{margin: 10}}/>
               </Pressable>
             </View>
@@ -149,7 +156,7 @@ export type Props = {
                 return (
                   <VendorReviewItem key={review.id}
                     rating={review.rating}
-                    reviewerName="Josh"
+                    reviewerName={review.reviewerName}
                     review={review.comment}
                     />)
               })
