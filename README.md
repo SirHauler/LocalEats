@@ -1,4 +1,4 @@
-# Local 
+# LocalEats
 
 ## Helps customers locate their favorite vendors that are constantly on the move!
 
