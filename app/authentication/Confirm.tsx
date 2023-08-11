@@ -32,7 +32,7 @@ const Confirm: React.FC<Props> = ({
           await Auth.confirmSignUp(String(username), code);
           console.log("This is the username: " + username)
           //Assuming all goes well you will end up here
-          router.replace("./SignIn")
+          router.replace("authentication/SignIn")
         //   navigation.navigate("SignIn")
         } catch (error) {
             console.log('error confirming sign up', error);

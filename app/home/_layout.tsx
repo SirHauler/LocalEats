@@ -45,8 +45,7 @@ export default function Layout() {
       tabBarIcon: () =>
       (<Ionicons name="person-sharp" size={20}/>), 
       headerShown: true, 
-      headerTitle: '', 
-      headerLeft: () => (<Text style={styles.headerLeft}>{username}</Text>), 
+      headerTitle: () => (<Text style={styles.headerLeft}>{username}</Text>),
       headerRight: () => (
         <TouchableOpacity style={styles.headerRight} onPress={() => router.push("settings/Settings")}>
           <Ionicons name="menu-sharp" size={30}/>
@@ -63,8 +62,7 @@ export default function Layout() {
 
 const styles = StyleSheet.create({
   headerLeft: {
-    marginLeft: 10, 
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: '400'
   }, 
   headerRight: {

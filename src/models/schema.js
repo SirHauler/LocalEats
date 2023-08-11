@@ -34,7 +34,7 @@ export const schema = {
                 "rating": {
                     "name": "rating",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -317,5 +317,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "e82f31e8d1b0d2167dec089e5f73ec97"
+    "version": "bfd60da67bf4692582909f27bde05556"
 };

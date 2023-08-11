@@ -3,7 +3,7 @@ type Review @model @auth(rules: [{allow: private}]) {
   user_id: ID!
   vendor_id: ID!
   reviewerName: String!
-  rating: Float!
+  rating: Int!
   comment: String!
   s3_photo_bucket_url: String
 }

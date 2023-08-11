@@ -29,7 +29,7 @@ export default function SignUp() {
 
     function routeToConfirm() {
         const dynamicRoute = {
-            pathname: "./Confirm", 
+            pathname: "authentication/Confirm", 
             params: {username: email}
         }
         router.push(dynamicRoute)
@@ -104,7 +104,7 @@ export default function SignUp() {
             </View>
 
             <TouchableOpacity>
-                <Text style={baseStyle.smallTextAuth} onPress={() => router.replace("/authentication/SignIn")}>Already a user? Login.</Text>
+                <Text style={baseStyle.smallTextAuth} onPress={() => router.replace("authentication/SignIn")}>Already a user? Login.</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => signUp(email, password)}>

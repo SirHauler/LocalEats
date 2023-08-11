@@ -10,7 +10,6 @@ import { Review } from '../../src/models';
 import { useLocalSearchParams } from 'expo-router';
 
 export interface CreateReviewProps {
-
 }
 
 const RatingButtons = [1, 2, 3, 4, 5]
@@ -76,7 +75,7 @@ const CreateReview: React.FC<CreateReviewProps> = (props) => {
             comment, 
             s3_bucket_url
         )
-
+        
         router.back();
     }
 
@@ -101,8 +100,6 @@ const CreateReview: React.FC<CreateReviewProps> = (props) => {
             reviewerName={attributes.name}
             reviwerFamilyName={attributes.family_name}
         />
-
-
 
             <Text style={styles.CommentHeader}>
                 Rating

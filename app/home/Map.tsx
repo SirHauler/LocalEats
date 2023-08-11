@@ -12,6 +12,7 @@ import { LazyVendorInfo } from '../../src/models';
 import fetchVendors from '../../util/fetchVendors';
 import { SearchBar } from '../../components/Map/SearchBar';
 import { HorizontalVendorScrollView } from '../../components/Map/HorizontalVendorScrollView';
+import * as Location from 'expo-location'; 
 export type MapPageProps = {
 
 }
@@ -27,9 +28,33 @@ const Map: React.FC<MapPageProps> = ({
 
 }) => {
     const [vendorData, setVendorData] = useState<LazyVendorInfo[]>([]);
+    const [location, setLocation] = useState<object>({});
+    const [errorMsg, setErrorMsg] = useState(""); 
     useEffect(() => {
         fetchVendors(setVendorData)
     }, [])
+
+    useEffect(() => {
+        (async () => {
+      
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied');
+              return;
+            }
+      
+            let location = await Location.getCurrentPositionAsync({});
+            const curLocation: Location = {
+                latitude: location["coords"]["latitude"], 
+                longitude: location["coords"]["longitude"], 
+                latitudeDelta: 0, 
+                longitudeDelta: 0
+            }
+            setLocation(location);
+            setFocusedLocation(curLocation);
+        
+          })();
+    }, []); 
 
     const sfRegion = {
         latitude: 37.78825,

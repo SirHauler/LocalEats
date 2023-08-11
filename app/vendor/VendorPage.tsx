@@ -58,12 +58,17 @@ export type Props = {
     const [photoURIs, setPhotoURIs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState<Review[]>([]); 
+    const [requery, setRequery] = useState<boolean>(false); 
 
     const handleCreateReviewButton = () => {
       router.push({pathname: 'vendor/CreateReview', params: {
         vendorID: vendorID,
         vendorName: vendorInfo?.name
-    }})
+    }})}
+
+
+    function onRefresh() {
+      getReviews(vendorID, setReviews)
     }
     useEffect(() => {
       getVendorInfo(vendorID, setVendorInfo); 
@@ -71,6 +76,16 @@ export type Props = {
 
     useEffect(() => {
       getReviews(vendorID, setReviews)
+      const sub = DataStore.observeQuery(
+        Review, 
+        r => r.and(r => [
+          r.vendor_id.eq(vendorID)
+        ])
+      ).subscribe(snapshot => {
+        const {items, isSynced} = snapshot;
+        onRefresh();
+        console.log(`[Snapshot] item count: ${items.length}, isSynced: ${isSynced}`);
+      })
     }, [])
 
     useEffect(() => {

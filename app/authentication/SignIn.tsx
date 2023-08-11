@@ -76,7 +76,7 @@ const SignIn:React.FC<Props> = ({
 
             <TouchableOpacity>
                 <Text style={baseStyle.smallTextAuth}
-                      onPress={() => router.replace("./SignUp")}
+                      onPress={() => router.replace("authentication/SignUp")}
                 >New? Register.</Text>
             </TouchableOpacity>
 
