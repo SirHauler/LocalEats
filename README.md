@@ -6,8 +6,8 @@
 
 
 <div style="display:flex;">
-<img alt="vendor_screen" src="./img/vendor_screen.png" style='width:50%;margin:10px'/>
+<img alt="vendor_screen" src="./img/vendor_screen.png" style='width:40%;margin:10px'/>
 
-<img alt="map_screen" src="./img/main_screen.png" style='width:50%;margin:10px'>
+<img alt="map_screen" src="./img/main_screen.png" style='width:40%;margin:10px'>
 
 </div>
