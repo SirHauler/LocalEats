@@ -1,12 +1,10 @@
 import React, {ReactComponentElement, useEffect, useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   View,
 } from 'react-native';
 
-
+import { API } from 'aws-amplify';
 import MapView, { Marker } from 'react-native-maps';
 import { LazyVendorInfo } from '../../src/models';
 import fetchVendors from '../../util/fetchVendors';
@@ -32,6 +30,14 @@ const Map: React.FC<MapPageProps> = ({
     const [errorMsg, setErrorMsg] = useState(""); 
     useEffect(() => {
         fetchVendors(setVendorData)
+    }, [])
+
+    useEffect(() => {
+        API.get('LocalEatsGeocodingAPI', '/geocoding/address', {})
+        .then((response) => {
+            console.log(response); 
+        })
+        .catch((error) => console.log(error.response))
     }, [])
 
     useEffect(() => {

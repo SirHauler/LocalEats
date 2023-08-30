@@ -113,10 +113,11 @@ export const schema = {
                 },
                 "specialties": {
                     "name": "specialties",
-                    "isArray": false,
-                    "type": "AWSJSON",
+                    "isArray": true,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true
                 },
                 "rating": {
                     "name": "rating",
@@ -317,5 +318,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "bfd60da67bf4692582909f27bde05556"
+    "version": "c4ca4d8812b7edac311afa1ed78bd855"
 };

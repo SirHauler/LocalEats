@@ -43,7 +43,7 @@ const VendorComponent: React.FC<Props> =  ({
     }, [])
 
     return (
-        <Pressable style={[styles.vendorBox, {shadowColor: 'black', shadowOpacity: .5,  shadowOffset: {width: -3, height: 3}}]}
+        <Pressable style={[styles.vendorBox]}
             onPress={() => router.push({pathname: '/vendor/VendorPage', params: {
                 vendorID: id,
             }})}>
@@ -93,7 +93,15 @@ const styles = StyleSheet.create({
         margin: 10, 
         borderRadius: 10,
         alignItems: 'center', 
-        width: 'auto'
+        width: 'auto', 
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+        elevation: 6,
     }, 
     starAndRatingContainer: {
         height: '100%', 
@@ -115,6 +123,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     }, 
     vendorText: {
+        
     }, 
 })
 

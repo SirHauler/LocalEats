@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 
+
 // import { Auth } from 'aws-amplify';
 
 import appStyles from '../../assets/appStyles';
@@ -24,6 +25,7 @@ import fetchVendors from '../../util/fetchVendors';
 export type Props = {
 
 }
+
 
 const Explore: React.FC<Props> = ({
 

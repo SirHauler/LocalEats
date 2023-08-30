@@ -99,7 +99,7 @@ export declare const Review: (new (init: ModelInit<Review, ReviewMetaData>) => R
 type EagerVendorInfo = {
   readonly id: string;
   readonly userid?: string | null;
-  readonly specialties?: string | null;
+  readonly specialties?: (string | null)[] | null;
   readonly rating?: number | null;
   readonly hours?: HoursJSON | null;
   readonly address?: AddressJSON | null;
@@ -111,7 +111,7 @@ type EagerVendorInfo = {
 type LazyVendorInfo = {
   readonly id: string;
   readonly userid?: string | null;
-  readonly specialties?: string | null;
+  readonly specialties?: (string | null)[] | null;
   readonly rating?: number | null;
   readonly hours?: HoursJSON | null;
   readonly address?: AddressJSON | null;

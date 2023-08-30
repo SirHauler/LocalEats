@@ -33,7 +33,7 @@ type AddressJSON {
 type VendorInfo @model @auth(rules: [{allow: private}]) {
   id: ID!
   userid: ID
-  specialties: AWSJSON
+  specialties: [String]
   rating: Float
   hours: HoursJSON
   address: AddressJSON

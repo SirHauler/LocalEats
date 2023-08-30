@@ -19,11 +19,15 @@
       "function": {
         "LocalEatsGeocodingHandler": {
           "deploymentBucketName": "amplify-localapp-dev-173425-deployment",
-          "s3Key": "amplify-builds/LocalEatsGeocodingHandler-6146524f3031792f7679-build.zip"
+          "s3Key": "amplify-builds/LocalEatsGeocodingHandler-4f323036574d4b59395a-build.zip"
         }
       },
       "storage": {
         "s3localappstoragevendorinfo": {}
+      },
+      "api": {
+        "LocalEatsGeocodingAPI": {},
+        "localapp": {}
       }
     }
   }

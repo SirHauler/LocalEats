@@ -177,9 +177,9 @@ export type Props = {
               })
             }
 
-            <Pressable style={{paddingTop: 30}} onPress={() => router.back()}>
+            {/* <Pressable style={{paddingTop: 30}} onPress={() => router.back()}>
                <Text>Go Back!</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </ScrollView> 
       </SafeAreaView>
