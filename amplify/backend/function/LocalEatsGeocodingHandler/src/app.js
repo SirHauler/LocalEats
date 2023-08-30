@@ -12,7 +12,25 @@ See the License for the specific language governing permissions and limitations 
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const axios = require('axios')
+async function getHandler() {
+  try {
+    const apiKey = 'AIzaSyCfoaGqL3OUqHK5x5h34n1ylzzKfBnsrY8';
+    const address = '1600 Amphitheatre Parkway, Mountain View, CA'; // Replace with your desired address
+        
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+    
+    const response = await axios.get(apiUrl)
+    // const responseData = await response.json();
 
+    if (response.status == 200) {
+      return JSON.stringify(response.data);
+    }
+
+  } catch (error) {
+    
+  }
+}
 // declare a new express app
 const app = express()
 app.use(bodyParser.json())
@@ -30,9 +48,27 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-app.get('/geocoding/:address', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed! - and hello my friend', url: req.url});
+
+
+app.get('/geocoding/:address', async(req, res) => {
+  try {
+    const apiKey = 'AIzaSyCfoaGqL3OUqHK5x5h34n1ylzzKfBnsrY8';
+    const address = '1600 Amphitheatre Parkway, Mountain View, CA'; // Replace with your desired address
+        
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+    
+    const response = await axios.get(apiUrl)
+    // const responseData = await response.json();
+
+    res.json({success: response, url: req.url});
+
+    // if (response.status == 200) {
+    //   return JSON.stringify(response.data);
+    // }
+
+  } catch (error) {
+    
+  }
 });
 
 app.get('/geocoding/:address/*', function(req, res) {
